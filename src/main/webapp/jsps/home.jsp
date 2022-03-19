@@ -19,7 +19,7 @@
 	<span style="font-weight: bold;">
 		Naresh Software Solutions, 
 		Martha Halli,
-		Bangalore,
+		Anantapur,
 		+91-9980923226,
 		devopstrainingbr@gmail.com
 		<br>
