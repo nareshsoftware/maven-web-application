@@ -3,7 +3,7 @@ node{
     echo "the node name is : ${env.Node_Name}"
      echo "the job name is : ${env.Job_Name}"
      echo "the build number is : ${Build_Number}"
-   properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), pipelineTriggers([cron('* * * * *'), pollSCM('* * * * *')])])
+   properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))
     timestamps {
  }
     def mavenHome = tool name: "maven3.8.5" 
