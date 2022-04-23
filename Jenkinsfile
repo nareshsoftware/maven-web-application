@@ -1,5 +1,5 @@
 node{
-    build name 'Dev - ${Build_Number}'
+  
     echo "the node name is : ${env.Node_Name}"
      echo "the job name is : ${env.Job_Name}"
      echo "the build number is : ${Build_Number}"
