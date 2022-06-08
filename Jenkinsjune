@@ -1,0 +1,26 @@
+node{
+    stage("git clone"){
+        git url: 'https://github.com/nareshsoftware/spring-boot-mongo-docker.git', branch: 'master'
+    }
+    stage("build code"){
+        def mavenHome = tool name: "maven3.8.5", type: "maven"
+        sh "${mavenHome}/bin/mvn clean package"
+    }
+    stage("build image docker"){
+        sh "docker build -t naresh06092020/springmongo:7 ."
+    }
+    stage("docker login"){
+        withCredentials([string(credentialsId: 'DockerHubPwd', variable: 'DockerHubPwd')]) {
+    sh "docker login -u naresh06092020 -p ${DockerHubPwd}"
+}
+    }
+    stage("docker push"){
+        sh "docker push naresh06092020/springmongo:7"
+    }
+    stage("docker deployment"){
+        sshagent(['Docker_Dev_ssh']) {
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.0.97 docker rm -f springmongodocker || true"
+           sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.0.97 docker run -d --name springmongodocker -p 6000:6000 naresh06092020/springmongo:7" 
+}
+    }
+}
